@@ -12,4 +12,12 @@
 
 2.  What does bcrypt do in order to prevent attacks?
 
+    Bcrypt hashes passwords and also adds a salt to them. It also increases the time it takes to generate passwords by hackers via a "cost" parameter.
+
 3)  What are the three parts of the JSON Web Token?
+
+    3 parts of the JWTs are the header, payload, and signature.
+
+    The header includes the type of token and the hashing algorithm used.
+
+    The payload uses to store data and the signature is the hashed string that includes the header, payload, and secret.
