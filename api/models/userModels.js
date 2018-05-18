@@ -26,9 +26,9 @@ UserSchema.pre("save", function(next) {
 });
 
 UserSchema.methods.checkPassword = function(plainTextPW, callBack) {
-  bcrypt.compare(plainTextPW, this.password, (err, isMatch) => {
-    if (err) return cb(err);
-    cb(null, isMatch);
+  return bcrypt.compare(plainTextPW, this.password, function(err, match) {
+    if (err) return callBack(err);
+    callBack(null, match);
   });
 };
 
