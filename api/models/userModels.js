@@ -12,15 +12,17 @@ const UserSchema = Schema({
     unique: true
   },
   password: {
+    type: String,
     required: true
   }
 });
 
 UserSchema.pre("save", function(next) {
-  // https://github.com/kelektiv/node.bcrypt.js#usage
-  // Fill this middleware in with the Proper password encrypting, bcrypt.hash()
-  // if there is an error here you'll need to handle it by calling next(err);
-  // Once the password is encrypted, call next() so that your userController and create a user
+  bcrypt.hash(this.password, 11, (err, hash) => {
+    if (err) return next(err);
+    this.password = hash;
+    next();
+  });
 });
 
 UserSchema.methods.checkPassword = function(plainTextPW, callBack) {
